@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://x35enam0bc4w"]
+
+[ext_resource type="Texture2D" uid="uid://de8if7d1ckci5" path="res://World Objects/TestWorldObject/testworldobject-32x32.png" id="1_xcdwe"]
+[ext_resource type="PackedScene" uid="uid://qnnst5q27rpw" path="res://Components/HitboxComponent/hitbox_component.tscn" id="2_jxchs"]
+[ext_resource type="PackedScene" uid="uid://beow4ihk763at" path="res://Components/HealthComponent/health_component.tscn" id="3_tc5vg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2uf2t"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxibq"]
+size = Vector2(34, 34)
+
+[node name="TestWorldObject" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2uf2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xcdwe")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_jxchs")]
+collision_layer = 8
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_nxibq")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_tc5vg")]
+MAX_HEALTH = 3

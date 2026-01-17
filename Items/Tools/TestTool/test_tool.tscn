@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfis327ffi4xr"]
+
+[ext_resource type="Script" path="res://Items/Tools/TestTool/test_tool.gd" id="1_eyeyx"]
+[ext_resource type="Texture2D" uid="uid://onede2kvc7pm" path="res://Items/Tools/TestTool/testtool-32x32.png" id="2_5k86m"]
+[ext_resource type="PackedScene" uid="uid://dp7vw5dd2apom" path="res://Components/HurtboxComponent/hurtbox_component.tscn" id="3_l57to"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awugk"]
+size = Vector2(20, 2)
+
+[sub_resource type="Animation" id="Animation_3442p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_6ggde"]
+resource_name = "test_tool_swing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(-8, -16), Vector2(0, -16), Vector2(25, 0), Vector2(0, 20), Vector2(-8, 19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.349066, 0.0, 1.5708, 3.14159, 3.49066]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugjkp"]
+_data = {
+"RESET": SubResource("Animation_3442p"),
+"test_tool_swing": SubResource("Animation_6ggde")
+}
+
+[node name="TestTool" type="Node2D"]
+script = ExtResource("1_eyeyx")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-12, 0)
+rotation = 1.5708
+texture = ExtResource("2_5k86m")
+
+[node name="HurtboxComponent" parent="Sprite" instance=ExtResource("3_l57to")]
+collision_layer = 2
+collision_mask = 24
+DAMAGE = 1
+KNOCKBACK = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HurtboxComponent"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_awugk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ugjkp")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c17pgw6w7eaig"]
+
+[ext_resource type="PackedScene" uid="uid://xu0vw6sqfoj" path="res://Player/Scenes/player.tscn" id="1_lfk3c"]
+[ext_resource type="PackedScene" uid="uid://x35enam0bc4w" path="res://World Objects/TestWorldObject/test_world_object.tscn" id="2_ahhf4"]
+
+[node name="World" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 722.0
+offset_bottom = 652.0
+color = Color(0.136918, 0.303381, 0.20319, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_lfk3c")]
+position = Vector2(351, 321)
+
+[node name="TestWorldObject" parent="." instance=ExtResource("2_ahhf4")]
+position = Vector2(410, 321)

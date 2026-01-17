@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://beow4ihk763at" path="res://Components/HealthComponent/health_component.tscn" id="4_5dvvq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1clmu"]
-radius = 7.0
+radius = 5.0
 height = 22.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vavnp"]
@@ -15,9 +15,6 @@ size = Vector2(12, 22)
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 24
 script = ExtResource("1_ckmmn")
-
-[node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(3.6, 3.6)
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -35,4 +32,8 @@ shape = SubResource("RectangleShape2D_vavnp")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_5dvvq")]
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="take_knockback" from="HitboxComponent" to="." method="_on_hitbox_component_take_knockback"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

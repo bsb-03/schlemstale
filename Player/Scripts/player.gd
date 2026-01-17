@@ -7,6 +7,8 @@ class_name Player
 
 @onready var SPRITE = $Sprite
 @onready var TEST_TOOL_SCENE = preload("res://Items/Tools/TestTool/test_tool.tscn")
+@onready var ATTACK_TIMER = $AttackTimer
+var canAttack := true
 
 func handle_sprite_flip(v : Vector2):
 	if(v.x > 0):
@@ -30,13 +32,18 @@ func get_input():
 	var move_input = Input.get_vector("left", "right", "up", "down")
 	move_player(move_input)
 	
-	if(Input.is_action_just_pressed("use")):
-		var mouse_pos := get_global_mouse_position()
-		var click_angle = get_angle_to(mouse_pos)
-		
-		var tts = TEST_TOOL_SCENE.instantiate()
-		tts.rotate(click_angle)
-		add_child(tts)
+	if(Input.is_action_pressed("use")):
+		if(canAttack):
+			var mouse_pos := get_global_mouse_position()
+			var click_angle = get_angle_to(mouse_pos)
+			
+			var tts = TEST_TOOL_SCENE.instantiate()
+			if(rad_to_deg(click_angle) < -90 || rad_to_deg(click_angle) > 90):
+				tts.scale.y = -1
+			tts.rotate(click_angle)
+			add_child(tts)
+			canAttack = false
+			ATTACK_TIMER.start()
 
 func _physics_process(delta: float) -> void:
 	get_input()
@@ -44,3 +51,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_hitbox_component_take_knockback(knockbackDirection : Vector2, knockback : float) -> void:
 	velocity += knockbackDirection * knockback
+
+func _on_attack_timer_timeout() -> void:
+	canAttack = true

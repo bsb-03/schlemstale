@@ -19,11 +19,10 @@ func _physics_process(delta: float) -> void:
 		var areas = get_overlapping_areas()
 		for a in areas:
 			if a.has_method("damage"):
-				a.damage(damage, get_instance_id())
-				pierce = pierce - 1
+				if(a.damage(damage, get_instance_id())):
+					pierce = pierce - 1
 				if pierce == 0:
-					var collider = get_child(0)
-					collider.set_disabled(true)
+					get_parent().queue_free()
 			if a.has_method("takeKnockback"):
 				var knockbackDirection : Vector2 = (a.get_global_position() - get_global_position()).normalized()
 				a.takeKnockback(knockbackDirection, knockback)

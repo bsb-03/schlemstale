@@ -80,7 +80,6 @@ texture = ExtResource("2_5k86m")
 collision_layer = 2
 collision_mask = 24
 DAMAGE = 1
-PIERCE = 2
 KNOCKBACK = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HurtboxComponent"]

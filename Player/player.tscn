@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://xu0vw6sqfoj"]
 
-[ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_ckmmn"]
-[ext_resource type="Texture2D" uid="uid://cehut48qndavn" path="res://Player/Sprites/schlem_16x24.png" id="2_oaxwj"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_ckmmn"]
+[ext_resource type="Texture2D" uid="uid://cehut48qndavn" path="res://Player/schlem_16x24.png" id="2_oaxwj"]
 [ext_resource type="PackedScene" uid="uid://qnnst5q27rpw" path="res://Components/HitboxComponent/hitbox_component.tscn" id="3_w4o2u"]
 [ext_resource type="PackedScene" uid="uid://beow4ihk763at" path="res://Components/HealthComponent/health_component.tscn" id="4_5dvvq"]
 

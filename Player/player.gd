@@ -8,6 +8,9 @@ class_name Player
 @onready var SPRITE = $Sprite
 @onready var TEST_TOOL_SCENE = preload("res://Items/Tools/TestTool/test_tool.tscn")
 @onready var ATTACK_TIMER = $AttackTimer
+
+const CROSSHAIR = preload("res://Player/crosshair.png")
+
 var canAttack := true
 
 func get_class_name() -> String:
@@ -45,6 +48,9 @@ func get_input():
 			add_child(tts)
 			canAttack = false
 			ATTACK_TIMER.start()
+
+func _ready() -> void:
+	Input.set_custom_mouse_cursor(CROSSHAIR, Input.CURSOR_ARROW)
 
 func _physics_process(delta: float) -> void:
 	get_input()

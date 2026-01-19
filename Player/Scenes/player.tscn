@@ -33,6 +33,7 @@ shape = SubResource("RectangleShape2D_vavnp")
 [node name="HealthComponent" parent="." instance=ExtResource("4_5dvvq")]
 
 [node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.88
 
 [connection signal="take_knockback" from="HitboxComponent" to="." method="_on_hitbox_component_take_knockback"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

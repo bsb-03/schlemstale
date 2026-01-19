@@ -10,12 +10,14 @@ class_name Player
 @onready var ATTACK_TIMER = $AttackTimer
 var canAttack := true
 
+func get_class_name() -> String:
+	return "Player"
+
 func handle_sprite_flip(v : Vector2):
 	if(v.x > 0):
 		SPRITE.set_flip_h(false)
 	elif (v.x < 0):
 		SPRITE.set_flip_h(true)
-	
 
 func move_player(v : Vector2):
 	var target_velocity = v * max_speed
@@ -26,7 +28,6 @@ func move_player(v : Vector2):
 		velocity = velocity.move_toward(target_velocity, acceleration * get_physics_process_delta_time())
 	
 	handle_sprite_flip(velocity)
-	
 
 func get_input():
 	var move_input = Input.get_vector("left", "right", "up", "down")

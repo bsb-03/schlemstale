@@ -13,6 +13,5 @@ func damage(d : float):
 	
 	if health <= 0:
 		if(get_parent().has_method("get_class_name")):
-			var c_name = get_parent().get_class_name()
-			if(c_name == "WorldObject"):
+			if(get_parent().get_class_name() == "WorldObject"):
 				get_parent().destroy()

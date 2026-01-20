@@ -1,26 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbkhlhomspub5"]
+[gd_scene load_steps=6 format=3 uid="uid://dbkhlhomspub5"]
 
 [ext_resource type="Texture2D" uid="uid://bhlbdwbym45ah" path="res://Items/Materials/TestItem/testitem-32x32.png" id="1_f6vd3"]
+[ext_resource type="Resource" uid="uid://dye26dcoxartw" path="res://Items/Materials/TestItem/test_item_data.tres" id="2_kbcfk"]
 [ext_resource type="Script" path="res://Items/Materials/TestItem/test_item.gd" id="2_r5fci"]
-[ext_resource type="Script" path="res://Resources/item_data.gd" id="3_8iy7v"]
-
-[sub_resource type="Resource" id="Resource_6bt61"]
-script = ExtResource("3_8iy7v")
-name = "Test Item"
-type = "Material"
-icon = ExtResource("1_f6vd3")
-stack_amt = 10
-item_path = "res://Items/Materials/TestItem/test_item.gd"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2iab0"]
 radius = 50.01
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_li8bu"]
-radius = 7.0
+radius = 9.0
 
 [node name="TestItem" type="Node2D"]
 script = ExtResource("2_r5fci")
-item_resource = SubResource("Resource_6bt61")
+item_resource = ExtResource("2_kbcfk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_f6vd3")

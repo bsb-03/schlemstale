@@ -1,13 +1,12 @@
 extends Node2D
 
-@export var item_resource : ItemResource
+@export var item_resource : ItemData
 
 @onready var GRAVITY_AREA = $GravityArea
 @onready var PICKUP_AREA = $PickupArea
 
 var item_name : String
 var item_type : String
-var stack_amt : int
 var item_path : String
 
 func gravitate_toward_player():
@@ -30,7 +29,6 @@ func check_pickup():
 func _ready() -> void:
 	item_name = item_resource.name
 	item_type = item_resource.type
-	stack_amt = item_resource.stack_amt
 	item_path = item_resource.item_path
 
 func _physics_process(delta: float) -> void:

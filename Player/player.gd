@@ -1,17 +1,23 @@
 extends CharacterBody2D
 class_name Player
 
+#--- EXPORT VARIABLES ---#
 @export var max_speed := 70
 @export var acceleration := 300
 @export var friction := 500
 
+#--- NODE/PATH REFERENCES ---#
 @onready var SPRITE = $Sprite
 @onready var TEST_TOOL_SCENE = preload("res://Items/Tools/TestTool/test_tool.tscn")
 @onready var ATTACK_TIMER = $AttackTimer
+const CROSSHAIR = preload("res://UI/crosshair.png")
 
-const CROSSHAIR = preload("res://Player/crosshair.png")
-
+#--- CONTROL VARIABLES ---#
 var canAttack := true
+
+#------#
+var inv_array : Array[ItemData] = []
+const INV_ARRAY_SIZE = 16
 
 func get_class_name() -> String:
 	return "Player"
@@ -50,7 +56,8 @@ func get_input():
 			ATTACK_TIMER.start()
 
 func _ready() -> void:
-	Input.set_custom_mouse_cursor(CROSSHAIR, Input.CURSOR_ARROW)
+	#Input.set_custom_mouse_cursor(CROSSHAIR, Input.CURSOR_ARROW)
+	inv_array.resize(INV_ARRAY_SIZE) # fix inv_array to desired size, 16 in this case for every item slot in the inventory
 
 func _physics_process(delta: float) -> void:
 	get_input()

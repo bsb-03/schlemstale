@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dye26dcoxartw"]
+
+[ext_resource type="Texture2D" uid="uid://bhlbdwbym45ah" path="res://Items/Materials/TestItem/testitem-32x32.png" id="1_lynx5"]
+[ext_resource type="Script" path="res://Resources/item_data.gd" id="2_uqhx4"]
+
+[resource]
+script = ExtResource("2_uqhx4")
+name = "Test Item"
+type = "Material"
+icon = ExtResource("1_lynx5")
+item_path = "res://Items/Materials/TestItem/test_item.gd"

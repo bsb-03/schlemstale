@@ -30,14 +30,16 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	icon.hide()
 	return self
 
-func _can_drop_data(_at_position: Vector2, data: Variant) -> bool: # for slots that can only hold specific types of items etc.
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	return true
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	var tmp = item
 	item = data.item
 	data.item = tmp
-	icon.show
-	data.icon.show
+	
+	icon.show()
+	data.icon.show()
+	
 	update_ui()
 	data.update_ui()

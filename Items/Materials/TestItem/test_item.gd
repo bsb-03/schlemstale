@@ -23,6 +23,7 @@ func check_pickup():
 		for b in bodies:
 			if(b.has_method("get_class_name")):
 				if(b.get_class_name() == "Player"):
+					b.add_to_inventory(item_resource)
 					queue_free() # replace with pickup
 
 func _ready() -> void:

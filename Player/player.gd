@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal item_picked_up(item_data : ItemData)
+
 #--- EXPORT VARIABLES ---#
 @export var max_speed := 70
 @export var acceleration := 300
@@ -11,14 +13,14 @@ class_name Player
 @onready var TEST_TOOL_SCENE = preload("res://Items/Tools/TestTool/test_tool.tscn")
 @onready var ATTACK_TIMER = $AttackTimer
 const CROSSHAIR = preload("res://UI/crosshair.png")
-@onready var INVENTORY_MENU: Control = $CanvasLayer/Inventory
+@onready var INVENTORY_MENU: Panel = $CanvasLayer/InventoryPanel
 
 
 #--- CONTROL VARIABLES ---#
 var canAttack := true
 var invIsVisible := false
 
-#------#
+#--- INVENTORY VARIABLES ---#
 var inv_array : Array[ItemData] = []
 const INV_ARRAY_SIZE = 16
 var inv_count : int = 0
@@ -47,7 +49,7 @@ func get_input():
 	move_player(move_input)
 	
 	if(Input.is_action_pressed("use")):
-		if(canAttack):
+		if(canAttack && !invIsVisible):
 			var mouse_pos := get_global_mouse_position()
 			var click_angle = get_angle_to(mouse_pos)
 			
@@ -81,3 +83,14 @@ func _on_hitbox_component_take_knockback(knockbackDirection : Vector2, knockback
 
 func _on_attack_timer_timeout() -> void:
 	canAttack = true
+
+func add_to_inventory(item : ItemData) -> bool: # cred : m. ahn
+	for i in range(INV_ARRAY_SIZE):
+		if inv_array[i] == null:
+			inv_array[i] = item
+			inv_count += 1
+			#print(inv_array)
+			item_picked_up.emit(item)
+			return true
+	#print(inv_array)
+	return false

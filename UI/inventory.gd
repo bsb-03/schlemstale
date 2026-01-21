@@ -1,5 +1,6 @@
 extends Panel
 
+@onready var grid_container: GridContainer = $MarginContainer/GridContainer
 
 const HAND_CLOSED = preload("res://UI/hand_closed.png")
 const HAND_OPEN = preload("res://UI/hand_open.png")
@@ -20,3 +21,11 @@ func _notification(what: int) -> void:
 			if data_bk:
 				data_bk.icon.show()
 				data_bk = null
+
+func _on_player_item_picked_up(item_data : ItemData) -> void:
+	var slots := grid_container.get_children()
+	for s in slots:
+		if s.item == null:
+			s.item = item_data
+			s.update_ui()
+			break

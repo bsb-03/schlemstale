@@ -39,8 +39,6 @@ wait_time = 0.88
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryPanel" parent="CanvasLayer" instance=ExtResource("5_4iknm")]
-offset_top = 51.0
-offset_bottom = 166.0
 
 [connection signal="item_picked_up" from="." to="CanvasLayer/InventoryPanel" method="_on_player_item_picked_up"]
 [connection signal="take_knockback" from="HitboxComponent" to="." method="_on_hitbox_component_take_knockback"]

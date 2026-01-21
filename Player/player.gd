@@ -11,13 +11,17 @@ class_name Player
 @onready var TEST_TOOL_SCENE = preload("res://Items/Tools/TestTool/test_tool.tscn")
 @onready var ATTACK_TIMER = $AttackTimer
 const CROSSHAIR = preload("res://UI/crosshair.png")
+@onready var INVENTORY_MENU: Control = $CanvasLayer/Inventory
+
 
 #--- CONTROL VARIABLES ---#
 var canAttack := true
+var invIsVisible := false
 
 #------#
 var inv_array : Array[ItemData] = []
 const INV_ARRAY_SIZE = 16
+var inv_count : int = 0
 
 func get_class_name() -> String:
 	return "Player"
@@ -54,10 +58,19 @@ func get_input():
 			add_child(tts)
 			canAttack = false
 			ATTACK_TIMER.start()
+	if(Input.is_action_just_pressed("toggle_inventory")):
+		if(invIsVisible):
+			INVENTORY_MENU.hide()
+			invIsVisible = false
+			return
+		
+		INVENTORY_MENU.show()
+		invIsVisible = true
 
 func _ready() -> void:
 	#Input.set_custom_mouse_cursor(CROSSHAIR, Input.CURSOR_ARROW)
 	inv_array.resize(INV_ARRAY_SIZE) # fix inv_array to desired size, 16 in this case for every item slot in the inventory
+	INVENTORY_MENU.hide()
 
 func _physics_process(delta: float) -> void:
 	get_input()

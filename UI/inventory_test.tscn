@@ -1,16 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2crjvnpgosv0"]
+[gd_scene load_steps=3 format=3 uid="uid://b2crjvnpgosv0"]
 
 [ext_resource type="Script" path="res://UI/item_slot.gd" id="1_mt3eh"]
 [ext_resource type="Script" path="res://UI/inventory.gd" id="1_mu2eg"]
-[ext_resource type="Texture2D" uid="uid://bhlbdwbym45ah" path="res://Items/Materials/TestItem/testitem-32x32.png" id="2_brvat"]
-[ext_resource type="Script" path="res://Resources/item_data.gd" id="4_vsxhs"]
-
-[sub_resource type="Resource" id="Resource_6bt61"]
-script = ExtResource("4_vsxhs")
-name = "Test Item"
-type = "Material"
-icon = ExtResource("2_brvat")
-item_path = "res://Items/Materials/TestItem/test_item.gd"
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -58,7 +49,6 @@ columns = 8
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 script = ExtResource("1_mt3eh")
-item = SubResource("Resource_6bt61")
 
 [node name="Icon" type="TextureRect" parent="InventoryPanel/MarginContainer/GridContainer/ItemSlot"]
 layout_mode = 1
